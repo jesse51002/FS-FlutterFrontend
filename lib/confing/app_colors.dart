@@ -1,6 +1,9 @@
 import 'dart:ui';
 
-class AppColors{
+import 'package:flutter/foundation.dart';
+import 'package:get_storage/get_storage.dart';
+
+class AppColors {
   static const Color primaryColor = Color(0xFF7A07CE);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color kf0f0f0fColor = Color(0xFFF0F0F0);
@@ -11,3 +14,11 @@ class AppColors{
   static const Color kC2C2C2Color = Color(0xFFC2C2C2);
   static const Color ke5e5e5Color = Color(0xFFE5E5E5);
 }
+
+printData(data) {
+  if (kDebugMode) {
+    print(data);
+  }
+}
+
+final getStorage = GetStorage();

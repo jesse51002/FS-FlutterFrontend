@@ -16,6 +16,8 @@ dependencies:
   dynamicutils: ^1.0.1
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.2.1
+  http: ^1.1.2
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:
