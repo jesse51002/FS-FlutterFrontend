@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hair_style_app/confing/app_colors.dart';
 import 'package:hair_style_app/confing/constant.dart';
 import 'package:hair_style_app/controller/home_controller.dart';
+import 'package:hair_style_app/controller/upload_custom_image_controller.dart';
 
 class HairStyleSelectionScreen extends StatelessWidget {
   const HairStyleSelectionScreen({super.key});
@@ -49,7 +50,10 @@ class HairStyleSelectionScreen extends StatelessWidget {
                         children: [
                           size.heightSpace(25),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Get.find<UploadCustomImageController>()
+                                  .getQrUrl();
+                            },
                             child: Container(
                               width: double.infinity,
                               padding: const EdgeInsets.symmetric(vertical: 8),
@@ -159,31 +163,31 @@ class HairStyleSelectionScreen extends StatelessWidget {
                 ),
           bottomNavigationBar: GestureDetector(
             onTap: controller.selectedImageIndex == -1
-                ? () {}
+                ? () {
+                    // Fluttertoast.showToast(msg: "Please select hairstyle.");
+                  }
                 : () {
                     /// do needful operation here
-                    printData("Tap on Button");
                   },
             child: Container(
               height: size.height(45),
               width: double.infinity,
               margin: const EdgeInsets.symmetric(horizontal: 28, vertical: 15),
               padding: const EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                  color: controller.selectedImageIndex == -1
-                      ? Colors.black12
-                      : AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: AppColors.k030303Color, width: 4)),
+              decoration: controller.selectedImageIndex == -1
+                  ? BoxDecoration(
+                      color: AppColors.kC7C7F1Color,
+                      borderRadius: BorderRadius.circular(24))
+                  : BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(24),
+                      border:
+                          Border.all(color: AppColors.k030303Color, width: 4)),
               child: Center(
                   child: Text(
                 'select_hairstyle'.tr,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 24,
-                    color: controller.selectedImageIndex == -1
-                        ? Colors.black
-                        : AppColors.whiteColor),
+                style: TextStyle(fontSize: 24, color: AppColors.whiteColor),
               )),
             ),
           ),

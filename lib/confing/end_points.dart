@@ -8,4 +8,20 @@ class EndPoints {
   Uri hairStylePreset({required String eventId}) {
     return Uri.parse("$baseUrl/hairstyle_presets?eventid=$eventId");
   }
+
+  Uri qrLink({required String eventId}) {
+    return Uri.parse("$baseUrl/custom_img/link?eventid=$eventId");
+  }
+
+  Uri getImageId({required String eventId}) {
+    return Uri.parse("$baseUrl/custom_img/imageid?eventid=$eventId");
+  }
+
+  Uri startRendering({required String eventId}) {
+    return Uri.parse("$baseUrl/rendering/start/?eventid=$eventId");
+  }
+
+  Uri getRenderingResult({required String eventId}) {
+    return Uri.parse("$baseUrl/rendering/results?eventid=$eventId");
+  }
 }

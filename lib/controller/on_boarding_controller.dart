@@ -5,7 +5,6 @@ import 'package:hair_style_app/confing/app_colors.dart';
 import 'package:hair_style_app/confing/end_points.dart';
 import 'package:hair_style_app/controller/home_controller.dart';
 import 'package:hair_style_app/http_handler/http_handler.dart';
-import 'package:hair_style_app/model/hair_style_preset.dart';
 import 'package:hair_style_app/screens/home/hair_style_selection.dart';
 
 class OnBoardingController extends GetxController {
@@ -25,7 +24,7 @@ class OnBoardingController extends GetxController {
         update();
         Get.find<HomeController>().hairStylePresetData();
       } else {
-        printData("Error-----------------");
+        printData("Error----------------- Get Started");
       }
     });
 

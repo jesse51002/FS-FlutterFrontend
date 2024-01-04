@@ -26,6 +26,7 @@ class HttpHandler {
       http.Response response = await http.get(
         url,
         headers: getHeaderWithToken(),
+        // body: body == null ? null : jsonEncode(body),
       );
       printData("Get Response Code -- '${response.statusCode}'");
       printData("Get Response -- '${response.body}'");
