@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hair_style_app/confing/app_colors.dart';
 import 'package:hair_style_app/confing/constant.dart';
 import 'package:hair_style_app/controller/home_controller.dart';
 import 'package:hair_style_app/controller/upload_custom_image_controller.dart';
+import 'package:hair_style_app/screens/custom_image/upload_custom_image.dart';
+import 'package:hair_style_app/screens/face_photographing/face_photographing_screen.dart';
 
 class HairStyleSelectionScreen extends StatelessWidget {
   const HairStyleSelectionScreen({super.key});
@@ -168,6 +171,8 @@ class HairStyleSelectionScreen extends StatelessWidget {
                   }
                 : () {
                     /// do needful operation here
+                    printData("Tap on Button");
+                    Get.to(const FacePhotoGraphingScreen());
                   },
             child: Container(
               height: size.height(45),
