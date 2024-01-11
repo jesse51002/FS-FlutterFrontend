@@ -88,15 +88,15 @@ class FacePhotoGraphingScreen extends StatelessWidget {
                                   border: Border.all(
                                       color: AppColors.k505050Color, width: 8)),
                               child: CarouselSlider.builder(
-                                  itemCount: controller.myImagesList.length >= 3
-                                      ? 3
-                                      : controller.myImagesList.length,
+                                  itemCount: controller.myImagesList.length,
                                   carouselController:
                                       controller.buttonCarouselController,
                                   itemBuilder: (context, index, realIndex) {
                                     print(
                                         "5757--------${controller.myImagesList.length}");
                                     print("index--------${index}");
+                                    print(
+                                        "temp Index--------${controller.tempIndex}");
                                     return controller.myImagesList.isNotEmpty
                                         ? Image.file(
                                             controller.myImagesList[index],
@@ -177,33 +177,42 @@ class FacePhotoGraphingScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                                child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 15),
-                              decoration: controller.myImagesList.isNotEmpty
-                                  ? BoxDecoration(
-                                      color: AppColors.primaryColor,
-                                      borderRadius: BorderRadius.circular(24),
-                                      border: Border.all(
-                                          color: AppColors.k030303Color,
-                                          width: 4))
-                                  : BoxDecoration(
-                                      color: AppColors.kC7C7F1Color,
-                                      borderRadius: BorderRadius.circular(24)),
-                              child: Center(
-                                  child: Text(
-                                controller.tempIndex == 0
-                                    ? 'Edit "Front" Photo'
-                                    : controller.tempIndex == 1
-                                        ? 'Edit "Right" Photo'
-                                        : controller.tempIndex == 2
-                                            ? 'Edit "Left" Photo'
-                                            : controller.tempIndex == 3
-                                                ? 'Edit "Back" Photo'
-                                                : "",
-                                style: const TextStyle(
-                                    fontSize: 14, color: AppColors.whiteColor),
-                              )),
+                                child: GestureDetector(
+                              onTap: () {
+                                printData(
+                                    "tempIndex :: ${controller.tempIndex}");
+                                controller.replaceImage(controller.tempIndex);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 15),
+                                decoration: controller.myImagesList.isNotEmpty
+                                    ? BoxDecoration(
+                                        color: AppColors.primaryColor,
+                                        borderRadius: BorderRadius.circular(24),
+                                        border: Border.all(
+                                            color: AppColors.k030303Color,
+                                            width: 4))
+                                    : BoxDecoration(
+                                        color: AppColors.kC7C7F1Color,
+                                        borderRadius:
+                                            BorderRadius.circular(24)),
+                                child: Center(
+                                    child: Text(
+                                  controller.tempIndex == 0
+                                      ? 'Edit "Front" Photo'
+                                      : controller.tempIndex == 1
+                                          ? 'Edit "Right" Photo'
+                                          : controller.tempIndex == 2
+                                              ? 'Edit "Left" Photo'
+                                              : controller.tempIndex == 3
+                                                  ? 'Edit "Back" Photo'
+                                                  : "",
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      color: AppColors.whiteColor),
+                                )),
+                              ),
                             )),
                             size.widthSpace(10),
                             Expanded(
@@ -211,29 +220,47 @@ class FacePhotoGraphingScreen extends StatelessWidget {
                                     ? const SizedBox()
                                     : GestureDetector(
                                         onTap: () {
-                                          if (controller.myImagesList.length !=
-                                              4) {
-                                            controller.tempIndex + 1;
-                                          } else {}
-                                          if (controller.myImagesList.length ==
-                                              4) {
-                                            // Get.to(const TransFormationResultScreen());
+                                          if (controller.myImagesList.length <=
+                                              controller.tempIndex + 1) {
+                                            if (controller
+                                                    .myImagesList.length !=
+                                                4) {
+                                              controller.tempIndex + 1;
+                                            } else {}
+                                            if (controller
+                                                    .myImagesList.length ==
+                                                4) {
+                                              // Get.to(const TransFormationResultScreen());
+                                            } else {
+                                              controller.pickImage();
+                                            }
                                           } else {
-                                            controller.pickImage();
+                                            printData("Not Possible");
                                           }
                                         },
                                         child: Container(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 10, vertical: 15),
                                           decoration: controller.isEnable
-                                              ? BoxDecoration(
-                                                  color: AppColors.primaryColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                  border: Border.all(
+                                              ? controller.myImagesList
+                                                          .length <=
+                                                      controller.tempIndex + 1
+                                                  ? BoxDecoration(
                                                       color: AppColors
-                                                          .k030303Color,
-                                                      width: 4))
+                                                          .primaryColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              24),
+                                                      border: Border.all(
+                                                          color: AppColors
+                                                              .k030303Color,
+                                                          width: 4))
+                                                  : BoxDecoration(
+                                                      color: AppColors
+                                                          .kC7C7F1Color,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              24))
                                               : BoxDecoration(
                                                   color: AppColors.kC7C7F1Color,
                                                   borderRadius:
