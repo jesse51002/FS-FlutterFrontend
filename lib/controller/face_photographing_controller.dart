@@ -173,8 +173,7 @@ class FacePhotoGraphingController extends GetxController {
         final response = jsonDecode(value["body"]);
 
         printData("getImageId Data----------------$response");
-        Get.to(const TransFormationResultScreen());
-        myImagesList.clear();
+
         Get.find<TransFormationResultController>().getRenderingResult();
         update();
       } else {
@@ -182,7 +181,6 @@ class FacePhotoGraphingController extends GetxController {
       }
     });
     // Get.to(const TransFormationResultScreen());
-
     isLoading = false;
     update();
   }

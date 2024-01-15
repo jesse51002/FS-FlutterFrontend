@@ -3,10 +3,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hair_style_app/confing/app_colors.dart';
 import 'package:hair_style_app/confing/constant.dart';
+import 'package:hair_style_app/controller/face_photographing_controller.dart';
 import 'package:hair_style_app/controller/home_controller.dart';
+import 'package:hair_style_app/controller/transformation_result_controller.dart';
 import 'package:hair_style_app/controller/upload_custom_image_controller.dart';
 import 'package:hair_style_app/screens/custom_image/upload_custom_image.dart';
 import 'package:hair_style_app/screens/face_photographing/face_photographing_screen.dart';
+import 'package:hair_style_app/screens/transformation_result/transformation_result_screen.dart';
 
 class HairStyleSelectionScreen extends StatelessWidget {
   const HairStyleSelectionScreen({super.key});
@@ -35,7 +38,8 @@ class HairStyleSelectionScreen extends StatelessWidget {
                 child: Image.asset('assets/images/ic_back_button.png')),
           ),
           backgroundColor: AppColors.kf0f0f0fColor,
-          body: controller.isLoading
+          body: controller.isLoading ||
+                  Get.find<TransFormationResultController>().isLoading
               ? const Center(
                   child: CircularProgressIndicator(
                     color: AppColors.primaryColor,
@@ -133,10 +137,12 @@ class HairStyleSelectionScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(26),
                                               border: Border.all(
+                                                  // color: controller
+                                                  //             .selectedImageIndex ==
+                                                  //         -1
                                                   color: controller
-                                                          .hairStylePreset!
-                                                          .hairstyles![index]
-                                                          .isSelected
+                                                              .selectedImageIndex ==
+                                                          index
                                                       ? AppColors.primaryColor
                                                       : AppColors.k505050Color,
                                                   width: controller
@@ -159,6 +165,7 @@ class HairStyleSelectionScreen extends StatelessWidget {
                                           ),
                                         ),
                                       );
+                                      // color: controller
                                     },
                                   ),
                                 ),
@@ -178,7 +185,21 @@ class HairStyleSelectionScreen extends StatelessWidget {
                 : () {
                     /// do needful operation here
                     printData("Tap on Button");
-                    Get.to(const FacePhotoGraphingScreen());
+                    Get.find<TransFormationResultController>()
+                            .myImagesList
+                            .isNotEmpty
+                        ? Get.find<FacePhotoGraphingController>()
+                            .startRendering()
+                        : null;
+
+                    print(
+                        "Tap Data --> ${Get.find<TransFormationResultController>().myImagesList.isNotEmpty}");
+
+                    Get.find<TransFormationResultController>()
+                            .myImagesList
+                            .isNotEmpty
+                        ? Get.to(const TransFormationResultScreen())
+                        : Get.to(const FacePhotoGraphingScreen());
                   },
             child: Container(
               height: size.height(45),

@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:hair_style_app/confing/app_colors.dart';
 import 'package:hair_style_app/confing/constant.dart';
 import 'package:hair_style_app/controller/face_photographing_controller.dart';
-import 'package:hair_style_app/controller/home_controller.dart';
 import 'package:hair_style_app/controller/upload_custom_image_controller.dart';
-import 'package:hair_style_app/screens/face_photographing/face_photographing_screen.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class UploadCustomImageScreen extends StatelessWidget {

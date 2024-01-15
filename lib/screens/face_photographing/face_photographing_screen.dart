@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hair_style_app/confing/app_colors.dart';
 import 'package:hair_style_app/confing/constant.dart';
 import 'package:hair_style_app/controller/face_photographing_controller.dart';
+import 'package:hair_style_app/controller/transformation_result_controller.dart';
 
 class FacePhotoGraphingScreen extends StatelessWidget {
   const FacePhotoGraphingScreen({super.key});
@@ -32,7 +33,8 @@ class FacePhotoGraphingScreen extends StatelessWidget {
                 child: Image.asset('assets/images/ic_back_button.png')),
           ),
           backgroundColor: AppColors.kf0f0f0fColor,
-          body: controller.isLoading
+          body: controller.isLoading ||
+                  Get.find<TransFormationResultController>().isLoading
               ? const Center(
                   child: CircularProgressIndicator(
                     color: AppColors.primaryColor,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hair_style_app/confing/app_colors.dart';
 import 'package:hair_style_app/confing/constant.dart';
+import 'package:hair_style_app/controller/face_photographing_controller.dart';
 import 'package:hair_style_app/controller/home_controller.dart';
 import 'package:hair_style_app/controller/transformation_result_controller.dart';
 import 'package:hair_style_app/screens/home/hair_style_selection.dart';
@@ -137,10 +138,8 @@ class TransFormationResultScreen extends StatelessWidget {
                           Expanded(
                               child: GestureDetector(
                             onTap: () {
-                              Get.offAll(const HairStyleSelectionScreen());
-                              Get.find<HomeController>().selectedImageIndex =
-                                  -1;
-                              Get.find<HomeController>().update();
+                              Get.find<FacePhotoGraphingController>().update();
+                              Get.to(const HairStyleSelectionScreen());
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
@@ -162,10 +161,19 @@ class TransFormationResultScreen extends StatelessWidget {
                           Expanded(
                               child: GestureDetector(
                             onTap: () {
-                              Get.offAll(const HairStyleSelectionScreen());
+                              Get.find<FacePhotoGraphingController>()
+                                  .myImagesList
+                                  .clear();
+                              Get.find<TransFormationResultController>()
+                                  .myImagesList
+                                  .clear();
                               Get.find<HomeController>().selectedImageIndex =
                                   -1;
                               Get.find<HomeController>().update();
+                              Get.find<FacePhotoGraphingController>().update();
+                              Get.find<TransFormationResultController>()
+                                  .update();
+                              Get.offAll(const HairStyleSelectionScreen());
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
