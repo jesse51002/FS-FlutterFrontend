@@ -183,7 +183,10 @@ class FacePhotoGraphingScreen extends StatelessWidget {
                               onTap: () {
                                 printData(
                                     "tempIndex :: ${controller.tempIndex}");
-                                controller.replaceImage(controller.tempIndex);
+                                controller.myImagesList.isNotEmpty
+                                    ? controller
+                                        .replaceImage(controller.tempIndex)
+                                    : null;
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -234,7 +237,14 @@ class FacePhotoGraphingScreen extends StatelessWidget {
                                                 4) {
                                               // Get.to(const TransFormationResultScreen());
                                             } else {
-                                              controller.pickImage();
+                                              controller.isEnable
+                                                  ? controller.myImagesList
+                                                              .length <=
+                                                          controller.tempIndex +
+                                                              1
+                                                      ? controller.pickImage()
+                                                      : null
+                                                  : null;
                                             }
                                           } else {
                                             printData("Not Possible");

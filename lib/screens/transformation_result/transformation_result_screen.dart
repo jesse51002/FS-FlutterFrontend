@@ -7,6 +7,7 @@ import 'package:hair_style_app/controller/face_photographing_controller.dart';
 import 'package:hair_style_app/controller/home_controller.dart';
 import 'package:hair_style_app/controller/transformation_result_controller.dart';
 import 'package:hair_style_app/screens/home/hair_style_selection.dart';
+import 'package:hair_style_app/screens/on_boarding/on_boarding_screen.dart';
 
 class TransFormationResultScreen extends StatelessWidget {
   const TransFormationResultScreen({super.key});
@@ -162,8 +163,12 @@ class TransFormationResultScreen extends StatelessWidget {
                               child: GestureDetector(
                             onTap: () {
                               Get.find<FacePhotoGraphingController>()
+                                  .tempIndex = 0;
+                              Get.find<FacePhotoGraphingController>()
                                   .myImagesList
                                   .clear();
+                              Get.find<FacePhotoGraphingController>().isEnable =
+                                  false;
                               Get.find<TransFormationResultController>()
                                   .myImagesList
                                   .clear();
@@ -173,7 +178,7 @@ class TransFormationResultScreen extends StatelessWidget {
                               Get.find<FacePhotoGraphingController>().update();
                               Get.find<TransFormationResultController>()
                                   .update();
-                              Get.offAll(const HairStyleSelectionScreen());
+                              Get.offAll(const OnBoardingScreen());
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
